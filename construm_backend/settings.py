@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-!4%x&$m#2%@_(10a8_%a3xu6qit$(!hafjg5)7#c$yq2rfa(g9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://construm-backend.onrender.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
