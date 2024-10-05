@@ -41,8 +41,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "projects",
-    "ckeditor",
-    "ckeditor_uploader"
+    "django_quill",
 ]
 
 MIDDLEWARE = [
@@ -61,7 +60,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "https://construmgeosystems.onrender.com/"
+ 
 ]
 
 ROOT_URLCONF = "construm_backend.urls"
@@ -146,20 +145,6 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# CKEditor Settings
-CKEDITOR_UPLOAD_PATH = "media/"
-CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
-CKEDITOR_5_CONFIGS = {
-    'default': {
-        'toolbar': 'full',
-        'height': 400,
-        'width': 'auto',
-        'tabSpaces': 4,
-        'filebrowserImageBrowseUrl': '/media/',
-    },
-}
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
