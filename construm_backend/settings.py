@@ -90,11 +90,14 @@ WSGI_APPLICATION = "construm_backend.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "construm",
-        "USER": "postgres",
-        "PASSWORD": "Tauren",
-        "HOST": "localhost",
-        "PORT": "5432",
+        "NAME": "defaultdb",  # Database name from the image
+        "USER": "avnadmin",  # User from the image
+        "PASSWORD": "AVNS_8-7yFiTA2itOBZ_7KOg",  # Password from the image
+        "HOST": "pg-3b074d57-simion7ombui-cd10.h.aivencloud.com",  # Host from the image
+        "PORT": "19597",  # Port from the image
+        "OPTIONS": {
+            "sslmode": "require",  # SSL mode
+        },
     }
 }
 
