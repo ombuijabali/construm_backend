@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-!4%x&$m#2%@_(10a8_%a3xu6qit$(!hafjg5)7#c$yq2rfa(g9"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['backend-construm.onrender.com', '127.0.0.1', 'localhost']
 
@@ -41,8 +41,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "projects",
-    "ckeditor",
-    "ckeditor_uploader"
+    "froala_editor",
 ]
 
 MIDDLEWARE = [
@@ -61,7 +60,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "https://construmgeosystems.onrender.com"
+    "https://construmgis.onrender.com"
 ]
 
 ROOT_URLCONF = "construm_backend.urls"
@@ -138,28 +137,49 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"
-#STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+# Simplified static file serving for production
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 # Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# CKEditor Settings
-CKEDITOR_UPLOAD_PATH = "media/"
-CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
-CKEDITOR_5_CONFIGS = {
-    'default': {
-        'toolbar': 'full',
-        'height': 400,
-        'width': 'auto',
-        'tabSpaces': 4,
-        'filebrowserImageBrowseUrl': '/media/',
-    },
+# Froala Editor Settings
+FROALA_EDITOR_PLUGINS = ('align', 'char_counter', 'code_beautifier', 'code_view', 'colors', 'draggable', 'emoticons',
+                        'entities', 'file', 'font_family', 'font_size', 'fullscreen', 'help', 'image', 'image_manager',
+                        'inline_style', 'line_breaker', 'link', 'lists', 'paragraph_format', 'paragraph_style', 'quick_insert',
+                        'quote', 'save', 'table', 'url', 'video')
+
+FROALA_EDITOR_OPTIONS = {
+    'height': 400,
+    'language': 'en',
+    'toolbarInline': False,
+    'toolbarVisibleWithoutSelection': True,
+    'charCounterCount': True,
+    'imageUploadURL': '/froala_editor/image_upload/',
+    'imageManagerLoadURL': '/froala_editor/image_manager/',
+    'imageManagerDeleteURL': '/froala_editor/image_manager/',
+    'imageManagerDeleteMethod': 'POST',
+    'imageMaxSize': 5 * 1024 * 1024,  # 5MB
+    'imageAllowedTypes': ['jpeg', 'jpg', 'png', 'gif'],
+    'fileUploadURL': '/froala_editor/file_upload/',
+    'fileMaxSize': 10 * 1024 * 1024,  # 10MB
+    'fileAllowedTypes': ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+    'sourceMap': False,  # Disable source maps
 }
 
+# Security settings for production
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

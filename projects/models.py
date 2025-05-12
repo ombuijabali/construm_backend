@@ -1,5 +1,5 @@
 from django.db import models
-from ckeditor_uploader.fields import RichTextUploadingField
+from froala_editor.fields import FroalaField
 
 class Project(models.Model):
     STATUS_CHOICES = [
@@ -8,7 +8,7 @@ class Project(models.Model):
     ]
 
     title = models.CharField(max_length=200)    
-    description = RichTextUploadingField() 
+    description = FroalaField() 
     preview_image = models.ImageField(upload_to='media/')
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='ongoing')
     created_at = models.DateTimeField(auto_now_add=True)
@@ -19,11 +19,11 @@ class Project(models.Model):
 
 class Blog(models.Model):
     title = models.CharField(max_length=200)
-    content = RichTextUploadingField() 
+    content = FroalaField() 
     short_description = models.TextField()
     preview_image = models.ImageField(upload_to='media/')
     created_at = models.DateTimeField(auto_now_add=True)
-    author = models.CharField(max_length=100)  # Add this field
+    author = models.CharField(max_length=100)
 
     def __str__(self):
         return self.title
